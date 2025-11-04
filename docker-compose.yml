@@ -1,0 +1,86 @@
+version: '3.9'
+
+services:
+  # API Service
+  api:
+    build:
+      context: .
+      target: runtime
+      args:
+        - PYTHON_VERSION=3.11
+    image: asset-management-mlops:latest
+    container_name: mlops-api
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=production
+      - AZURE_STORAGE_ACCOUNT_NAME=${AZURE_STORAGE_ACCOUNT_NAME}
+      - AZURE_STORAGE_CONNECTION_STR=${AZURE_STORAGE_CONNECTION_STR}
+      - MLFLOW_TRACKING_URI=${MLFLOW_TRACKING_URI:-file:./mlruns}
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./mlruns:/app/mlruns
+      - ./logs:/app/logs
+    networks:
+      - mlops-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Dashboard Service
+  dashboard:
+    build:
+      context: .
+      target: runtime
+    image: asset-management-mlops:latest
+    container_name: mlops-dashboard
+    command: streamlit run src/dashboard.py --server.port=8501 --server.address=0.0.0.0
+    ports:
+      - "8501:8501"
+    environment:
+      - ENVIRONMENT=production
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./logs:/app/logs
+    networks:
+      - mlops-network
+    restart: unless-stopped
+    depends_on:
+      - api
+
+  # Airflow Scheduler (optional)
+  airflow-scheduler:
+    build:
+      context: .
+      target: runtime
+    image: asset-management-mlops:latest
+    container_name: mlops-airflow-scheduler
+    command: airflow scheduler
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=sqlite:////app/airflow.db
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+    volumes:
+      - ./airflow:/app/airflow
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./logs:/app/logs
+    networks:
+      - mlops-network
+    restart: unless-stopped
+
+networks:
+  mlops-network:
+    driver: bridge
+
+volumes:
+  data:
+  models:
+  mlruns:
+  logs:

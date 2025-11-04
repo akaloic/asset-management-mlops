@@ -1,0 +1,43 @@
+# Requirements - Asset Management MLOps Pipeline
+# Auto-generated from pyproject.toml
+
+## Core Data Science & Machine Learning
+pandas>=2.3.3             # Data manipulation and analysis
+numpy>=2.3.4              # Numerical computing
+scikit-learn>=1.7.2       # Machine learning algorithms
+xgboost>=3.1.1            # Gradient boosting
+lightgbm>=4.6.0           # Light Gradient Boosting Machine
+scipy>=1.13.0             # Scientific computing
+joblib>=1.4.0             # Model serialization
+
+## Data Acquisition & Processing
+yfinance>=0.2.66          # Financial data API (Yahoo Finance)
+requests>=2.32.5          # HTTP library
+pyarrow>=17.0.0           # Parquet/Arrow file support
+sqlalchemy>=2.0.0         # SQL database toolkit
+
+## Visualization
+matplotlib>=3.10.7        # Plotting library
+seaborn>=0.13.2           # Statistical data visualization
+plotly>=5.24.0            # Interactive dashboards
+
+## MLOps, Experiment Tracking, and Orchestration
+mlflow>=2.14.0            # ML experiment/version tracking
+apache-airflow>=2.10.0    # Workflow orchestration
+
+## Cloud Integration (Azure)
+azure-storage-blob>=12.19.0         # Azure Blob Storage SDK
+azure-identity>=1.19.0              # Azure authentication
+azure-keyvault-secrets>=4.9.0       # Secrets management
+
+## Dashboard & API
+streamlit>=1.39.0         # Interactive dashboard
+fastapi>=0.115.0          # REST API framework
+uvicorn>=0.32.0           # ASGI server for FastAPI
+pydantic>=2.9.0           # Data validation
+
+## Configuration, Logging & Utilities
+python-dotenv>=1.0.0      # Environment variable management
+loguru>=0.7.0             # Elegant logging
+
+# Note: All packages are compatible with Python >=3.11, as specified in pyproject.toml

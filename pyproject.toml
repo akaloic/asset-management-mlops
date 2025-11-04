@@ -1,0 +1,42 @@
+[project]
+name = "predict-project"
+version = "0.1.0"
+description = "Pipeline MLOps asset management, scoring risque & optimisation portefeuille"
+authors = [
+    {name = "loicjiraud@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pandas>=2.3.3",
+    "numpy>=2.3.4",
+    "scikit-learn>=1.7.2",
+    "xgboost>=3.1.1",
+    "lightgbm>=4.6.0",
+    "matplotlib>=3.10.7",
+    "seaborn>=0.13.2",
+    "yfinance>=0.2.66",
+    "requests>=2.32.5",
+    "streamlit>=1.39.0",
+    "fastapi>=0.115.0",
+    "uvicorn>=0.32.0",
+    "pydantic>=2.9.0",
+    "mlflow>=3.5.0",
+    "azure-storage-blob>=12.19.0",
+    "azure-identity>=1.19.0",
+    "azure-keyvault-secrets>=4.9.0",
+    "plotly>=5.24.0",
+    "scipy>=1.13.0",
+    "joblib>=1.4.0",
+    "python-dotenv>=1.0.0",
+    "loguru>=0.7.0",
+    "sqlalchemy>=2.0.0",
+]
+
+# Note: Apache Airflow est installé séparément car il nécessite Python <3.14
+# Pour installer Airflow, utilisez: pip install 'apache-airflow>=2.10.0,<3.14'
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
