@@ -1,5 +1,6 @@
 # Asset Management MLOps Pipeline
 
+![CI Pipeline](https://github.com/akaloic/asset-management-mlops/actions/workflows/ci-simple.yml/badge.svg)
 ![Python](https://img.shields.io/badge/python-3.11+-blue.svg)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-green.svg)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
